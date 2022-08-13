@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -14,7 +17,13 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+
+        if (Auth::id()){
+
+
+        }
+
+
     }
 
     /**
@@ -35,9 +44,22 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
 
+
+        if(Auth::id()){
+
+            // $price=Product::find($request->id);
+
+                $comment = new Comment();
+                $comment->user_id = auth()->user()->id;
+                $comment->product_id = $request->id;
+                $comment->comment = $request->comment;
+                $comment->save();
+
+                return redirect(url()->previous())->with('message','your comment was submmited successfully.');          // return view('pages.productDetails', compact("single", "Productjoin","related_products"));
+
+    }
+    }
     /**
      * Display the specified resource.
      *

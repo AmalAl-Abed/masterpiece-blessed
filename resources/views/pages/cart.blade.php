@@ -42,42 +42,52 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Quantity</th>
+                    <th >Quantity</th>
                     <th>Total price</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                   </thead>
 
 
 
                   <tbody>
 
-
-
-
+                          @foreach ($cartItems as $item)
                         <tr>
-                          <td><img src="" height="100" alt=""></td>
-                          <td>product name</td>
-                          <td>JOD </td>
+                          <td><img src={{$item->image}} height="100" alt=""></td>
+                          <td>{{$item->name}}</td>
+                          <td>{{$item->regular_price}} </td>
 
                           <td>
-                            <form action="" method="post">
-                              <input type="hidden" name="update_quantity_id" value="">
-                              <input type="number" name="update_quantity" min="1" value="">
+                            <form action="{{route('cart.update', $item->id)}}"  method="POST" enctype="multipart/form-data">
+
+                              @method('PUT')
+                              @csrf
+                              <input type="number" name="quantity" min="1" value={{$item->quantity}}>
                               <input type="submit" class='btn btn-main btn-small btn-round' value="CONFIRM"   style="background-color:black;" name="update_update_btn">
 
 
                             </form>
+                            <?php
 
+?>
                           </td>
 
 
-                          <td>JOD /-</td>
+                          <td>{{$item->sub_total}}.00JD /-</td>
+
+                          <form action="{{ route('cart.destroy' , $item->id)}}" method="POST" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+                            <td><button style="border:none; background:#fff"><i class="fa-solid fa-trash-can" style="margin-left:40px"></i></a></button></td>
+                        </form>
+
+
+
+                          @endforeach
 
 
 
 
-
-                          <td><a href="" onclick="" class="delete-btn"> <i class="fas fa-trash"></i> remove</a></td>
 
 
 
@@ -85,12 +95,22 @@
 
 
 
-
                     <tr class="table-bottom">
                       <td><a href='products.php?cat=6' class="btn btn-main " style="margin-top:0;">Continue shopping</a></td>
                       <td colspan="3" style="font-size:20px"><b>Grand Total<b></td>
-                      <td style="font-size:20px"><b>JOD /-<b></td>
-                      <td><a href="" onclick="return confirm('Are you sure you want to delete all?');" class="delete-btn"> <i class="fas fa-trash"></i> Delete all </a></td>
+                      <td style="font-size:20px"><b>{{$total}}JD /-<b></td>
+
+
+                        {{-- <form action="{{ route('cart.destroy' , $item->id)}}" method="POST" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+                             <td><button class="delete-btn"> Delete all </a></button>
+                        </form> --}}
+
+
+
+
+
                     </tr>
 
                   </tbody>
@@ -100,8 +120,8 @@
                 </table>
 
 
-           
-                <a href="cart.php?name=true" class="btn btn-main pull-right">Checkout</a>
+
+                <a href="{{route('checkout')}}" class="btn btn-main pull-right">Checkout</a>
 
 
 

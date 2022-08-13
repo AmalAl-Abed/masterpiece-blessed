@@ -20,26 +20,29 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 
     <!-- Themefisher Icon font -->
-    <link rel="stylesheet" href={{asset("plugins/themefisher-font/style.css")}}>
+    <link rel="stylesheet" href={{ asset('plugins/themefisher-font/style.css') }}>
     <!-- bootstrap.min css -->
-    <link rel="stylesheet" href={{asset("plugins/bootstrap/css/bootstrap.min.css")}}>
+    <link rel="stylesheet" href={{ asset('plugins/bootstrap/css/bootstrap.min.css') }}>
 
     <!-- Animate css -->
-    <link rel="stylesheet" href={{asset("plugins/animate/animate.css")}}>
+    <link rel="stylesheet" href={{ asset('plugins/animate/animate.css') }}>
     <!-- Slick Carousel -->
-    <link rel="stylesheet" href={{asset("plugins/slick/slick.css")}}>
-    <link rel="stylesheet" href={{asset("plugins/slick/slick-theme.css")}}>
+    <link rel="stylesheet" href={{ asset('plugins/slick/slick.css') }}>
+    <link rel="stylesheet" href={{ asset('plugins/slick/slick-theme.css') }}>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/css/login.css')}}"> --}}
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href={{asset("css/style.css")}}>
-    <link rel="preconnect" href={{asset("https://fonts.googleapis.com")}}>
-    <link rel="preconnect" href={{asset("https://fonts.googleapis.com")}}>
-    <link rel="preconnect" href={{asset("https://fonts.gstatic.com")}} crossorigin>
+    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="preconnect" href={{ asset('https://fonts.googleapis.com') }}>
+    <link rel="preconnect" href={{ asset('https://fonts.googleapis.com') }}>
+    <link rel="preconnect" href={{ asset('https://fonts.gstatic.com') }} crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@200&family=Work+Sans:ital,wght@0,200;0,400;0,500;0,700;1,300&display=swap"
         rel="stylesheet">
@@ -47,13 +50,13 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Styles -->
-        @livewireStyles
-        {{-- <link rel="stylesheet" href="{{ asset('/css/app.css')}}"> --}}
+    <!-- Styles -->
+    @livewireStyles
+    {{-- <link rel="stylesheet" href="{{ asset('/css/app.css')}}"> --}}
 
-        <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-        <script src="{{ asset('js/app.js')}}"></script>
+    <!-- Scripts -->
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
 <body id="body">
@@ -94,43 +97,55 @@
                     <!-- Cart -->
                     <ul class="top-menu text-right list-inline">
                         <li class="dropdown cart-nav dropdown-slide">
-                            <a href="/cart" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-                                    class="tf-ion-android-cart"></i>Cart</a>
+                            <a href="{{ route('cart.index') }} "class="dropdown-toggle" data-toggle="dropdown"
+                                data-hover="dropdown"><i class="tf-ion-android-cart"></i>Cart</a>
                             <div class="dropdown-menu cart-dropdown">
                                 <!-- Cart Item -->
-                                <div class="media">
-                                    <a class="pull-left" href="#!">
-                                        <img class="media-object" src="images/shop/cart/cart-1.jpg" alt="image" />
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                                        <div class="cart-price">
-                                            <span>1 x</span>
-                                            <span>1250.00</span>
+
+                                @php
+
+                                    use App\Models\Cart;
+                                    if (Auth::user() && Cart::where('user_id', Auth::user()->id)->count() > 0) {
+                                        $cartItems = Cart::orderBy('carts.id', 'ASC')
+                                            ->where('user_id', auth()->user()->id)
+                                            ->join('users', 'carts.user_id', '=', 'users.id')
+                                            ->join('products', 'carts.product_id', '=', 'products.id')
+                                            ->get(['carts.id', 'carts.sub_total', 'carts.quantity', 'products.image', 'products.name', 'products.regular_price']);
+                                            $total = Cart::where('user_id', auth()->user()->id)->pluck('sub_total')->sum();
+                                    }
+                                @endphp
+
+                                @if (Auth::user() && Cart::where('user_id', Auth::user()->id)->count() > 0)
+                                    <div class="media">
+
+
+                                        <a class="pull-left" href="#!">
+                                            <img class="media-object" src="{{ $cartItems[0]->image }}"
+                                                alt="image" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="#!">{{ $cartItems[0]->name }}</a>
+                                            </h4>
+                                            <div class="cart-price">
+                                                <span>{{ $cartItems[0]->quantity }} x</span>
+                                                <span>{{ $cartItems[0]->regular_price }} </span>
+                                            </div>
+                                            <h5><strong> </strong></h5>
                                         </div>
-                                        <h5><strong>$1200</strong></h5>
+                                        <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
+
                                     </div>
-                                    <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-                                </div><!-- / Cart Item -->
-                                <!-- Cart Item -->
-                                <div class="media">
-                                    <a class="pull-left" href="#!">
-                                        <img class="media-object" src="images/shop/cart/cart-2.jpg" alt="image" />
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                                        <div class="cart-price">
-                                            <span>1 x</span>
-                                            <span>1250.00</span>
-                                        </div>
-                                        <h5><strong>$1200</strong></h5>
-                                    </div>
-                                    <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-                                </div><!-- / Cart Item -->
+
+                                @endif
+
+
+
+                                <!-- / Cart Item -->
+
 
                                 <div class="cart-summary">
                                     <span>Total</span>
-                                    <span class="total-price">$1799.00</span>
+                                    <span class="total-price">{{$total}}.00JD</span>
                                 </div>
                                 <ul class="text-center cart-buttons">
                                     <li><a href="/cart" class="btn btn-small">View Cart</a></li>
@@ -143,8 +158,8 @@
 
                         <!-- Search -->
                         <li class="dropdown search dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown"
-                                data-hover="dropdown"><i class="tf-ion-ios-search-strong"></i> Search</a>
+                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+                                    class="tf-ion-ios-search-strong"></i> Search</a>
                             <ul class="dropdown-menu search-dropdown">
                                 <li>
                                     <form action="post"><input type="search" class="form-control"
@@ -316,7 +331,7 @@
                                     <li class="dropdown dropdown-slide">
                                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown"
                                             data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true"
-                                            aria-expanded="false">{{ Auth::user()->name }}'s Profile  <span
+                                            aria-expanded="false">{{ Auth::user()->name }}'s Profile <span
                                                 class="tf-ion-ios-arrow-down"></span></a>
 
                                         <ul class="dropdown-menu">
@@ -326,7 +341,7 @@
 
                                             <li><a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
-                                           </li>
+                                            </li>
 
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -341,14 +356,15 @@
                                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown"
                                             data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true"
                                             aria-expanded="false">
-                                            {{ Auth::user()->name }}'s Profile <span class="tf-ion-ios-arrow-down"></span></a>
+                                            {{ Auth::user()->name }}'s Profile <span
+                                                class="tf-ion-ios-arrow-down"></span></a>
                                         <ul class="dropdown-menu">
 
                                             <li><a href="/user/profile">Account</a></li>
 
                                             <li><a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
-                                           </li>
+                                            </li>
 
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST">

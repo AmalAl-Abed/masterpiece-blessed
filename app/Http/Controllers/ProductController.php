@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        $Productjoin = DB::table('products')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.*', 'categories.name as category_name')
+        ->get();
+        // dd($Productjoin);
+        return view('admin.productView', compact('Productjoin'));
     }
 
     /**
@@ -26,7 +33,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = DB::table('categories')->get();
+        return view('admin.product_Create')->with('categories', $categories);
     }
 
     /**
@@ -37,7 +45,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->description = $request->description;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('public/Productimages');
+            $image->move($destinationPath, $name);
+            $product->image = $name;
+            $product->regular_price = $request->price;
+            $product->category_id = $request->category_id;
+            $product->save();
+            return redirect('/product')->with('success', 'Product has been added');
+        }
     }
 
     /**
@@ -51,19 +73,23 @@ class ProductController extends Controller
         $single = Product::find($id);
         $related_products = Product::where('category_id', $single->category_id)->inRandomOrder()->Limit(4)->get();
 
-      
+
 
         $Productjoin = DB::table('products')
         ->join('categories', 'products.category_id', '=', 'categories.id')
         ->select('categories.name as categoryName')
         ->where('products.id', $id)->get();
 
+        $showComments= Comment::orderBy('comments.id', 'ASC')
+        ->join('users', 'comments.user_id', '=', 'users.id')
+        ->where('comments.product_id',$id)
+        ->get(['comments.*','users.name']);
 
 
 
-        return view('pages.productDetails', compact("single", "Productjoin","related_products"));
+
+        return view('pages.productDetails', compact("single", "Productjoin","related_products","showComments"));
     }
-
 
 
 
@@ -76,9 +102,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $Productjoin = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.*', 'categories.name as category_name')
+        ->where('products.id', $id)->get();
+        $categories = DB::table('categories')->get();
+
+        return view('admin.product_Edit', compact('Productjoin', 'categories'));
     }
 
     /**
@@ -88,9 +119,23 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request,$id)
     {
-        //
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->description = $request->description;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('public/Productimages');
+            $image->move($destinationPath, $name);
+            $product->image = $name;
+        }
+        $product->regular_price = $request->price;
+        $product->category_id = $request->category_id;
+        $product->save();
+        return redirect('/product')->with('success', 'Product has been added');
     }
 
     /**
@@ -99,8 +144,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/product')->with('success', 'Product has been deleted Successfully');
     }
 }

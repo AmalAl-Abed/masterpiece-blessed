@@ -61,7 +61,7 @@
                                         <div class="product-item">
                                             <div class="product-thumb">
                                                 <span class="bage">Sale</span>
-                                                <img class="img-responsive" src="https://www.narscosmetics.com/on/demandware.static/-/Sites-itemmaster_NARS/default/dw3efc5fcb/2022/March/0194251130200_1.jpg" alt="product-img" />
+                                                <img class="img-responsive" src="{{$product->image}}" alt="product-img" />
                                                 <div class="preview-meta">
                                                     <ul>
                                                         <li>

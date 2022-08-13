@@ -59,7 +59,7 @@
                     <div class='col-md-6'>
                         <div class='category-box'>
                             <a href='{{ route('category.show', $category->id) }}'>
-                                <img src='https://i.ytimg.com/vi/TNHXfys3Dak/maxresdefault.jpg' alt='' />
+                                <img src={{ $category->image }} alt='' width="200px" height="300px" />
                                 <div class='content' style='background-color: #ffffffdb;'>
                                     <h3>{{ $category->name }}</h3>
                                     <p>{{ $category->description }}</p>
@@ -86,7 +86,7 @@
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <img class="img-responsive" src="images/shop/products/product-1.jpg" alt="product-img" />
+                                <img class="img-responsive" src="{{$item->image}}" alt="product-img" />
                                 <div class="preview-meta">
                                     <ul>
                                         <li>

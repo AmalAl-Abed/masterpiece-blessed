@@ -20,7 +20,6 @@ class CreateCartsTable extends Migration
             $table->bigInteger('quantity')->unsigned();
             $table->double('price')->unsigned();
             $table->double('sub_total')->unsigned();
-            $table->double('total')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

@@ -1,21 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Livewire\HomeComponent;
-// use App\Http\Livewire\ContactComponent;
-// use App\Http\Livewire\ShopComponent;
-// use App\Http\Livewire\AboutComponent;
-// use App\Http\Livewire\CartComponent;
-// use App\Http\Livewire\CheckoutComponent;
-// use App\Http\Livewire\OrdersComponent;
-// use App\Http\Livewire\ProductDetailsComponent;
-// use App\Http\Livewire\ProfileDetailsComponent;
-// use App\Http\Livewire\Admin\AdminDashboardComponent;
-// use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,44 +18,14 @@ use App\Http\Controllers\CartController;
 |
 */
 
-// Route::get('categories/{id}', [CategoryController::class])->name('categories.show');
-// Route::get('products/{id}', [ProductController::class,'show'])->name('singleProduct.show');
 
 Route::get('/about', function () {
     return view('pages.about');
 });
 
-
-Route::get('/contact', function () {
-    return view('pages.contact');
+Route::get('/confirm', function () {
+    return view('pages.confirmation');
 });
-
-Route::get('/checkout', function () {
-    return view('pages.checkout');
-});
-
-
-
-// Route::get('/shop', function () {
-//     return view('pages.shop');
-// });
-
-
-Route::get('/cart', function () {
-    return view('pages.cart');
-});
-
-
-Route::get('/orders', function () {
-    return view('pages.orders');
-});
-
-
-Route::get('/product', function () {
-    return view('pages.productDetails');
-});
-
-
 
 
 Route::get('/profile', function () {
@@ -72,14 +33,35 @@ Route::get('/profile', function () {
 });
 
 
-Route::resource('pages/contact', ContactController::class);
+
 
 Route::get('/' , 'App\Http\Controllers\CategoryController@showCategory');
+Route::get('/order' , 'App\Http\Controllers\OrderController@showOrders');
+Route::get('/checkout' , 'App\Http\Controllers\CartController@checkout')->name('checkout');
 
 
+Route::resource('contact', ContactController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('product', ProductController::class);
 Route::resource('cart', CartController::class);
+Route::resource('orders', OrderController::class);
+Route::resource('comments', CommentController::class);
+
+
+
+
+
+
+//admin Routes
+Route::post('category/{id}', [CategoryController::class, 'update'])->name('updateCategory');
+Route::post('product/{id}', [ProductController::class, 'update'])->name('updateroduct');
+
+Route::get('/admindash',[OrderController::class,'viewOrders'] )->name('admindash');
+Route::post('cancel/{id}',[OrderController::class,'cancel'] )->name('cancel');
+Route::post('shipp/{id}',[OrderController::class,'shipped'] )->name('shipped');
+Route::post('pend/{id}',[OrderController::class,'pending'] )->name('pending');
+Route::post('delever/{id}',[OrderController::class,'delevered'] )->name('delevered'); ;
+Route::post('process/{id}',[OrderController::class,'process'] )->name('process'); ;
 
 
 

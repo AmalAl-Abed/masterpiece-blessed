@@ -50,25 +50,14 @@
                   </form>
                </div>
                <div class="block">
-                  <h4 class="widget-title">Payment Method</h4>
-                  <p>Credit Cart Details (Secure payment)</p>
+
+
                   <div class="checkout-product-details">
                      <div class="payment">
                         <div class="card-details">
-                           <form  class="checkout-form">
-                              <div class="form-group">
-                                 <label for="card-number">Card Number <span class="required">*</span></label>
-                                 <input  id="card-number" class="form-control"   type="tel" placeholder="•••• •••• •••• ••••">
-                              </div>
-                              <div class="form-group half-width padding-right">
-                                 <label for="card-expiry">Expiry (MM/YY) <span class="required">*</span></label>
-                                 <input id="card-expiry" class="form-control" type="tel" placeholder="MM / YY">
-                              </div>
-                              <div class="form-group half-width padding-left">
-                                 <label for="card-cvc">Card Code <span class="required">*</span></label>
-                                 <input id="card-cvc" class="form-control"  type="tel" maxlength="4" placeholder="CVC" >
-                              </div>
-                              <a href="confirmation.html" class="btn btn-main mt-20">Place Order</a >
+                           <form  class="checkout-form" method="POST" action="{{route('orders.store')}}">
+                            @csrf
+                              <button href="{{route('orders.store')}}" class="btn btn-main mt-20">Place Order</button >
                            </form>
                         </div>
                      </div>
@@ -79,23 +68,28 @@
                <div class="product-checkout-details">
                   <div class="block">
                      <h4 class="widget-title">Order Summary</h4>
+
+                    @foreach ($cartItems as $item)
+
                      <div class="media product-card">
-                        <a class="pull-left" href="product-single.html">
-                           <img class="media-object" src="images/shop/cart/cart-1.jpg" alt="Image" />
+                        <a class="pull-left" href={{$item->image}}>
+                           <img class="media-object" src="{{$item->image}}" alt="Image" />
                         </a>
                         <div class="media-body">
-                           <h4 class="media-heading"><a href="product-single.html">Ambassador Heritage 1921</a></h4>
-                           <p class="price">1 x $249</p>
+                           <h4 class="media-heading"><a href="product-single.html">{{$item->name}}</a></h4>
+                           <p class="price">{{$item->quantity}} x {{$item->regular_price}}JD</p>
                            <span class="remove" >Remove</span>
                         </div>
                      </div>
+                     @endforeach
+
                      <div class="discount-code">
                         <p>Have a discount ? <a data-toggle="modal" data-target="#coupon-modal" href="#!">enter it here</a></p>
                      </div>
                      <ul class="summary-prices">
                         <li>
                            <span>Subtotal:</span>
-                           <span class="price">$190</span>
+                           <span class="price">{{$total}}JD</span>
                         </li>
                         <li>
                            <span>Shipping:</span>
@@ -103,12 +97,10 @@
                         </li>
                      </ul>
                      <div class="summary-total">
-                        <span>Total</span>
+                        <span>Total:</span>
                         <span>$250</span>
                      </div>
-                     <div class="verified-icon">
-                        <img src="images/shop/verified.png">
-                     </div>
+
                   </div>
                </div>
             </div>
