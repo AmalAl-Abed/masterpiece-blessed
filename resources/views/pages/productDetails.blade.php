@@ -34,7 +34,7 @@
                                 <!-- me art lab slider -->
                                 <div class='carousel-inner '>
                                     <div class='item active'>
-                                        <img src='images/shop/single-products/product-1.jpg' alt=''
+                                        <img src='/public/Productimages/{{ $single->image}}' alt=''
                                             data-zoom-image="images/shop/single-products/product-1.jpg" />
                                     </div>
                                     <div class='item'>
@@ -73,7 +73,7 @@
                             <!-- thumb -->
                             <ol class='carousel-indicators mCustomScrollbar meartlab'>
 
-                                <img src={{ $single->image }} alt='' height=500 />
+                                {{-- <img src='/public/Productimages/{{ $single->image}}' alt='' height=500 /> --}}
 
                                 <li data-target='#carousel-custom' data-slide-to='1'>
                                     <img src='images/shop/single-products/product-2.jpg' alt='' />
@@ -109,11 +109,9 @@
                             accusamus similique sapiente tempora, at atque cumque assumenda minus asperiores est esse sequi
                             dolore magnam. Debitis, explicabo.</p>
                         <div class="color-swatches">
-                            <span>color:</span>
+                            <span>shades:</span>
                             <ul>
-                                <li>
-                                    <a href="#!" class="swatch-violet"></a>
-                                </li>
+                              
                                 <li>
                                     <a href="#!" class="swatch-black"></a>
                                 </li>
@@ -267,20 +265,27 @@
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <img class="img-responsive" src="{{ $item->image }}" alt="product-img" />
+                                <img class="img-responsive" src="/public/Productimages/{{ $item->image}}" alt="product-img" />
                                 <div class="preview-meta">
                                     <ul>
-                                        <li>
+                                        {{-- <li>
                                             <span data-toggle="modal" data-target="#product-modal">
                                                 <i class="tf-ion-ios-search"></i>
                                             </span>
                                         </li>
                                         <li>
                                             <a href="#"><i class="tf-ion-ios-heart"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                        </li>
+                                        </li> --}}
+                                        <form action="{{ route('cart.store')}}" method="post">
+                                            <input type="hidden" name="id" value="{{ $item->id }}"/>
+                                            <input type="hidden" name="quantity" value="1" />
+                                            <input type="hidden" name="product_price" value="{{$item->product_price }}"/>
+                                            @csrf
+                                        <button class="btn btn-main"><i class="tf-ion-ios-cart"></i></button>
+                                        </form>
+
+
+
                                     </ul>
                                 </div>
                             </div>
@@ -300,34 +305,5 @@
 
 
     <!-- Modal -->
-    <div class="modal product-modal fade" id="product-modal">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <i class="tf-ion-close"></i>
-        </button>
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="modal-image">
-                                <img class="img-responsive" src="images/shop/products/modal-product.jpg" />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="product-short-details">
-                                <h2 class="product-title">GM Pendant, Basalt Grey</h2>
-                                <p class="product-price">$200</p>
-                                <p class="product-short-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil cum. Illo
-                                    laborum numquam rem aut officia dicta cumque.
-                                </p>
-                                <a href="#!" class="btn btn-main">Add To Cart</a>
-                                <a href="#!" class="btn btn-transparent">View Product Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @endsection

@@ -61,17 +61,17 @@
                                         <div class="product-item">
                                             <div class="product-thumb">
                                                 <span class="bage">Sale</span>
-                                                <img class="img-responsive" src="{{$product->image}}" alt="product-img" />
+                                                <img class="img-responsive" src="/public/Productimages/{{$product->image}}" alt="product-img" />
                                                 <div class="preview-meta">
                                                     <ul>
-                                                        <li>
+                                                        {{-- <li>
                                                             <span  data-toggle="modal" data-target="#product-modal">
                                                                 <i class="tf-ion-ios-search-strong"></i>
                                                             </span>
-                                                        </li>
-                                                        <li>
+                                                        </li> --}}
+                                                        {{-- <li>
                                                             <a href="#!" ><i class="tf-ion-ios-heart"></i></a>
-                                                        </li>
+                                                        </li> --}}
                                                         <li>
 
 
@@ -82,7 +82,7 @@
                                                             <input type="hidden" name="quantity" value="1" />
                                                             <input type="hidden" name="product_price" value="{{$product->product_price }}"/>
 
-                                                            <button type="submit" >
+                                                            <button type="submit" style="width: 45px;height:45px;border:none" >
                                                              <i class="tf-ion-android-cart"></i>
                                                             </button>
                                                         </form>

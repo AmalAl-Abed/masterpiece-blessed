@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <img  class="float-left" src="../images/favicon.png" width="150px" height="100px">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -26,8 +26,8 @@
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
+            <div class="flex items-center justify-end mt-4" >
+                <x-jet-button style="background-color: hsl(0deg 0% 0% / 81%)">
                     {{ __('Reset Password') }}
                 </x-jet-button>
             </div>

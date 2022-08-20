@@ -1,7 +1,12 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+
+
+
+       <img  class="float-left" src="../images/favicon.png" width="150px" height="100px">
+
+
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -25,8 +30,8 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
+                <x-jet-button style="background-color: hsl(0deg 0% 0% / 81%)">
+                    {{ __('Password Reset Link') }}
                 </x-jet-button>
             </div>
         </form>

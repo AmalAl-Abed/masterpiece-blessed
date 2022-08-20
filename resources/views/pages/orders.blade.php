@@ -53,8 +53,19 @@
 									<td>{{$order->created_at}}</td>
 									<td>{{$order->product_quantity}}</td>
 									<td>{{$order->order_total_price}}</td>
-									<td><span class="label label-primary">{{$order->order_status}}</span></td>
-									<td><a href="order.html" class="btn btn-default">View</a></td>
+
+                                    @if($order->order_status == 0)
+									<td><span class="label label-warning">Pending</span></td>
+                                    @elseif($order->order_status == 1)
+                                    <td><span class="label label-info">Processing</span></td>
+                                    @elseif($order->order_status == 2)
+                                    <td><span class="label label-primary">Shipped</span></td>
+                                    @elseif($order->order_status == 3)
+                                    <td><span class="label label-success">Delivered</span></td>
+                                    @elseif($order->order_status == 4)
+                                    <td><span class="label label-danger">Cancelled</span></td>
+									{{-- <td><a href="order.html" class="btn btn-default">View</a></td> --}}
+                                    @endif
 								</tr>
                                 @endforeach
 							</tbody>

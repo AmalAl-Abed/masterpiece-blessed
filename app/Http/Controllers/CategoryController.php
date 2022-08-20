@@ -21,12 +21,12 @@ class CategoryController extends Controller
     }
 
 
-    public function showCategory()
-    {
-        $data= Category::all();
-        $popular_products = Product:: inRandomOrder()->Limit(3)->get();
-        return view("pages.home",compact("data" ,"popular_products"));
-    }
+    // public function showCategory()
+    // {
+    //     $data= Category::all();
+    //     $popular_products = Product:: inRandomOrder()->Limit(3)->get();
+    //     return view("pages.home",compact("data" ,"popular_products"));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -76,6 +76,15 @@ class CategoryController extends Controller
 
         return view('pages.shop',compact("data","categories","category"));
 
+
+
+    }
+
+    public function showNav()
+    {
+        $category = Category::all();
+
+        return view('layouts.nav',compact("category"));
 
 
     }

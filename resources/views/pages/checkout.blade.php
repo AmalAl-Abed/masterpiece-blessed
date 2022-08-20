@@ -73,7 +73,7 @@
 
                      <div class="media product-card">
                         <a class="pull-left" href={{$item->image}}>
-                           <img class="media-object" src="{{$item->image}}" alt="Image" />
+                           <img class="media-object" src='/public/Productimages/{{$item->image}}'" alt="Image" />
                         </a>
                         <div class="media-body">
                            <h4 class="media-heading"><a href="product-single.html">{{$item->name}}</a></h4>

@@ -53,9 +53,9 @@
 
                           @foreach ($cartItems as $item)
                         <tr>
-                          <td><img src={{$item->image}} height="100" alt=""></td>
+                          <td><img src='/public/Productimages/{{$item->image}}'height="100" alt=""></td>
                           <td>{{$item->name}}</td>
-                          <td>{{$item->regular_price}} </td>
+                          <td>{{$item->regular_price}}JD</td>
 
                           <td>
                             <form action="{{route('cart.update', $item->id)}}"  method="POST" enctype="multipart/form-data">

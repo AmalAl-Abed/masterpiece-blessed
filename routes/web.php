@@ -7,6 +7,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CommentController;
+use Illuminate\Support\Facades\View;
+use App\Models\Category;
+use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,9 +38,27 @@ Route::get('/profile', function () {
 
 
 
-Route::get('/' , 'App\Http\Controllers\CategoryController@showCategory');
-Route::get('/order' , 'App\Http\Controllers\OrderController@showOrders');
-Route::get('/checkout' , 'App\Http\Controllers\CartController@checkout')->name('checkout');
+Route::get('/', function () {
+    return view('pages.home');
+});
+
+
+
+
+Route::get('/order', 'App\Http\Controllers\OrderController@showOrders');
+Route::get('/checkout', 'App\Http\Controllers\CartController@checkout')->name('checkout');
+
+
+view::composer(['pages.home', 'layouts.nav'], function ($view) {
+
+    $data = Category::all();
+    $popular_products = Product::inRandomOrder()->Limit(3)->get();
+    $view->with('data', $data)->with('popular_products', $popular_products);
+});
+
+
+
+//website Routes
 
 
 Route::resource('contact', ContactController::class);
@@ -49,23 +70,17 @@ Route::resource('comments', CommentController::class);
 
 
 
-
-
-
-//admin Routes
-Route::post('category/{id}', [CategoryController::class, 'update'])->name('updateCategory');
-Route::post('product/{id}', [ProductController::class, 'update'])->name('updateroduct');
-
-Route::get('/admindash',[OrderController::class,'viewOrders'] )->name('admindash');
-Route::post('cancel/{id}',[OrderController::class,'cancel'] )->name('cancel');
-Route::post('shipp/{id}',[OrderController::class,'shipped'] )->name('shipped');
-Route::post('pend/{id}',[OrderController::class,'pending'] )->name('pending');
-Route::post('delever/{id}',[OrderController::class,'delevered'] )->name('delevered'); ;
-Route::post('process/{id}',[OrderController::class,'process'] )->name('process'); ;
-
-
-
-
+// For Admin
+Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () {
+    Route::post('category/{id}', [CategoryController::class, 'update'])->name('updateCategory');
+    Route::post('product/{id}', [ProductController::class, 'update'])->name('updateProduct');
+    Route::get('/admindash', [OrderController::class, 'viewOrders'])->name('admindash');
+    Route::post('cancel/{id}', [OrderController::class, 'cancel'])->name('cancel');
+    Route::post('shipp/{id}', [OrderController::class, 'shipped'])->name('shipped');
+    Route::post('pend/{id}', [OrderController::class, 'pending'])->name('pending');
+    Route::post('delever/{id}', [OrderController::class, 'delevered'])->name('delevered');;
+    Route::post('process/{id}', [OrderController::class, 'process'])->name('process');;
+});
 
 
 
@@ -118,15 +133,3 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
-
-// For User
-// Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-//     Route::get('/user/dashboard', UserDashboardComponent::class) ->name('user.dashboard');
-// });
-
-
-// // For Admin
-// Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function () {
-//     Route::get('/admin/dashboard', AdminDashboardComponent::class) ->name('admin.dashboard');
-// });

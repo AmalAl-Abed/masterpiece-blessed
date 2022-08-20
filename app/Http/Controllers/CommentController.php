@@ -55,6 +55,7 @@ class CommentController extends Controller
                 $comment->product_id = $request->id;
                 $comment->comment = $request->comment;
                 $comment->save();
+                
 
                 return redirect(url()->previous())->with('message','your comment was submmited successfully.');          // return view('pages.productDetails', compact("single", "Productjoin","related_products"));
 

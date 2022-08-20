@@ -59,7 +59,7 @@
                     <div class='col-md-6'>
                         <div class='category-box'>
                             <a href='{{ route('category.show', $category->id) }}'>
-                                <img src={{ $category->image }} alt='' width="200px" height="300px" />
+                                <img src="public/image/{{$category->image}}" alt='' width="200px" height="300px" />
                                 <div class='content' style='background-color: #ffffffdb;'>
                                     <h3>{{ $category->name }}</h3>
                                     <p>{{ $category->description }}</p>
@@ -72,6 +72,14 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+
+
+
 
     <section class="products section bg-gray">
         <div class="container">
@@ -86,20 +94,29 @@
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <img class="img-responsive" src="{{$item->image}}" alt="product-img" />
+                                <img class="img-responsive" src="public/Productimages/{{$item->image}}" alt="product-img" />
                                 <div class="preview-meta">
                                     <ul>
-                                        <li>
+                                        {{-- <li>
                                             <span data-toggle="modal" data-target="#product-modal">
                                                 <i class="tf-ion-ios-search-strong"></i>
                                             </span>
                                         </li>
                                         <li>
                                             <a href="#!"><i class="tf-ion-ios-heart"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                        </li>
+                                        </li> --}}
+
+                                        <form action="{{ route('cart.store')}}" method="post">
+                                            @csrf
+
+                                            <input type="hidden" name="id" value="{{ $item->id }}"/>
+                                            <input type="hidden" name="quantity" value="1" />
+                                            <input type="hidden" name="product_price" value="{{$item->product_price }}"/>
+
+                                            <button type="submit" style="width: 45px;height:45px;border:none" >
+                                             <i class="tf-ion-android-cart"></i>
+                                            </button>
+                                        </form>
                                     </ul>
                                 </div>
                             </div>

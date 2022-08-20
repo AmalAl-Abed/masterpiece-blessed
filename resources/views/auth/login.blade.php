@@ -103,7 +103,7 @@
           <div class="card" style="border-radius: 1rem;">
             <div class="row g-0">
               <div class="col-md-6 col-lg-5 d-none d-md-block">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                <img src="../images/login.jpg"
                   alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
               </div>
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -114,19 +114,21 @@
                     @csrf
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                      <span class="h1 fw-bold mb-0">Blessed</span>
+                      <span class="h1 fw-bold mb-0" style="font-size: 3.7rem">Blessed</span>
                     </div>
 
                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                     <div class="form-outline mb-4">
-                      <input  id="email" class="form-control form-control-lg" type="email" name="email" :value="old('email')" required autofocus   />
-                      <label class="form-label" for="email" value="{{ __('Email') }}">Email address</label>
+                        <label class="form-label" for="email" value="{{ __('Email') }}" style="font-size: 1.2rem">Email address</label>
+                      <input  id="email" class="form-control form-control-lg" type="email" name="email" :value="old('email')" required autofocus  />
+
                     </div>
 
                     <div class="form-outline mb-4">
+                        <label class="form-label" for="password" value="{{ __('Password') }}" style="font-size: 1.2rem">Password</label>
                       <input  class="form-control form-control-lg" id="password" type="password" name="password" required autocomplete="current-password" />
-                      <label class="form-label" for="password" value="{{ __('Password') }}" >Password</label>
+
                     </div>
 
                     {{-- <div class="pt-1 mb-4">
@@ -134,14 +136,15 @@
                     </div> --}}
 
 
-                <x-jet-button class="btn btn-dark btn-lg btn-block">
+                <x-jet-button class="btn btn-dark btn-lg btn-block" >
                     {{ __('Log in') }}
                 </x-jet-button>
-                    <a class="small text-muted" href="{{route('password.request')}}">Forgot password?</a>
-                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account?
+                <br>
+                    <a class="text-muted lead" href="{{route('password.request')}}">Forgot password?</a>
+                    <br>
+                    <p class="mb-5 pb-lg-2" style="color: #212529;">Don't have an account?
                         <a href="/register"style="color: #393f81;">Register here</a></p>
-                    <a href="#!" class="small text-muted">Terms of use.</a>
-                    <a href="#!" class="small text-muted">Privacy policy</a>
+
                   </form>
 
                 </div>

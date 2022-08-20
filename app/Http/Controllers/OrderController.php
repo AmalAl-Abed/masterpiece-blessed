@@ -21,9 +21,9 @@ class OrderController extends Controller
             $user = Cart::where('user_id', auth()->user()->id)
                 ->join('users', 'carts.user_id', '=', 'users.id')
                 ->join('products', 'carts.product_id', '=', 'products.id')
-                ->get(['carts.sub_total', 'carts.quantity', 'products.image', 'products.name as productName', 'products.id as product_id', 'products.price', 'users.name', 'users.address', 'users.id as user_id', 'users.phonenumber', 'users.email']);
+                ->get(['carts.sub_total', 'carts.quantity', 'products.image', 'products.name as productName', 'products.id as product_id', 'products.regular_price', 'users.name', 'users.address', 'users.id as user_id', 'users.phonenumber', 'users.email']);
             $total = Cart::where('user_id', auth()->user()->id)->pluck('sub_total')->sum();
-            // dd($user);
+             dd($user);
             if ($user->isNotEmpty()) {
                 return view('pages.checkout', compact('user', 'total'));
             } else {

@@ -65,14 +65,14 @@
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
 
-
+<br>
         <!-- phonenumber -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="phonenumber" value="{{ __('phonenumber') }}" />
             <x-jet-input id="phonenumber" type="text" class="mt-1 block w-full" wire:model.defer="state.phonenumber" autocomplete="phonenumber" />
             <x-jet-input-error for="phonenumber" class="mt-2" />
         </div>
-
+        <br>
          <!-- address -->
          <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="address" value="{{ __('address') }}" />

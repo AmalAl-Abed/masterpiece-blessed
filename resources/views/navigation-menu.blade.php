@@ -15,7 +15,12 @@
                     <x-jet-nav-link href="/" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="/order" :active="request()->routeIs('/orders')">
+                        {{ __('Orders') }}
+                    </x-jet-nav-link>
                 </div>
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
