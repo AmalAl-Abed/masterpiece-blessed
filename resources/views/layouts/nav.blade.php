@@ -57,6 +57,88 @@
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <script src="{{ asset('js/app.js') }}"></script>
+    <style>
+        /* your CSS goes here*/
+
+
+
+
+        /* services */
+        .services {
+            padding: 40px;
+            position: relative;
+        }
+
+        .services .square {
+            height: 100px;
+            width: 100px;
+            margin: 30px auto 40px;
+            position: relative;
+            border-radius: 15px;
+            transform: rotate(45deg);
+            padding: 10px;
+            background-color: #d3a6a1;
+            box-shadow: 0px 0px 27px 0px #ccc;
+            border: 2px dotted #eaf3fa;
+        }
+
+        .square i {
+            transform: rotate(315deg);
+            display: block;
+            color: #eaf3fa;
+            font-size: 40px;
+            padding-top: 17px;
+            padding-right: 14px;
+        }
+
+        .services .square::before {
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background-color: black;
+            content: '';
+        }
+
+        .services .square::after {
+            position: absolute;
+            left: 50px;
+            top: 66px;
+            width: 1px;
+            height: 88%;
+            background-color: black;
+            content: '';
+            transform: rotate(90deg);
+        }
+
+        .services .serv .num {
+            width: 60px;
+            height: 60px;
+            background-color: #7499f1;
+            box-shadow: 0px 0px 15px 0px #00a9d3;
+            margin: -38px auto 15px auto;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 30px;
+            padding-top: 7px;
+            border: 1px dashed;
+        }
+
+        .services .serv h4 {
+            color: black;
+            margin-top: 53px;
+        }
+
+        .services .serv p {
+            color: #777;
+        }
+
+        .services .serv hr {
+            width: 30px;
+            border-top: 3px solid rgb(0 169 211);
+        }
+    </style>
 </head>
 
 <body id="body">
@@ -111,7 +193,9 @@
                                             ->join('users', 'carts.user_id', '=', 'users.id')
                                             ->join('products', 'carts.product_id', '=', 'products.id')
                                             ->get(['carts.id', 'carts.sub_total', 'carts.quantity', 'products.image', 'products.name', 'products.regular_price']);
-                                            $total = Cart::where('user_id', auth()->user()->id)->pluck('sub_total')->sum();
+                                        $total = Cart::where('user_id', auth()->user()->id)
+                                            ->pluck('sub_total')
+                                            ->sum();
                                     }
                                 @endphp
 
@@ -145,7 +229,7 @@
 
                                 <div class="cart-summary">
                                     <span>Total</span>
-                                    <span class="total-price">{{$total ?? 0}}.00JD</span>
+                                    <span class="total-price">{{ $total ?? 0 }}.00JD</span>
                                 </div>
                                 <ul class="text-center cart-buttons">
                                     <li><a href="/cart" class="btn btn-small">View Cart</a></li>
@@ -168,15 +252,6 @@
                             </ul>
                         </li><!-- / Search -->
 
-                        <!-- Languages -->
-                        <li class="commonSelect">
-                            <select class="form-control">
-                                <option>EN</option>
-                                <option>DE</option>
-                                <option>FR</option>
-                                <option>ES</option>
-                            </select>
-                        </li><!-- / Languages -->
 
                     </ul><!-- / .nav .navbar-nav .navbar-right -->
                 </div>
@@ -221,10 +296,9 @@
                             <ul class="dropdown-menu">
 
                                 @foreach ($data as $category)
-
-
-
-                                <li><a href="{{ route('category.show', $category->id) }}" >{{$category->name}}</a></li>
+                                    <li><a
+                                            href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
 
                             </ul>
@@ -233,19 +307,17 @@
 
 
                         <!-- Pages -->
-                        <li class="dropdown full-width dropdown-slide">
-                            <a href="/contact" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                                data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Contact
-                </a>
-                          <!-- / .dropdown-menu -->
-                        </li><!-- / Pages -->
+                        <!-- Home -->
+                        <li class="dropdown ">
+                            <a href="/contact">Contact</a>
+                        </li><!-- / Home -->
+                        <!-- / Pages -->
+                        <!-- Home -->
+                        <li class="dropdown ">
+                            <a href="/about">About</a>
+                        </li><!-- / Home -->
+                        <!-- / Pages -->
 
-                        <li class="dropdown full-width dropdown-slide">
-                            <a href="/contact" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                                data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">About
-                </a>
-                          <!-- / .dropdown-menu -->
-                        </li>
 
 
 

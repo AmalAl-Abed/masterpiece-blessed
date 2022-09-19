@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="widget">
+                    {{-- <div class="widget">
                         <h4 class="widget-title">Sort By</h4>
                         <form method="post" action="#">
                             <select class="form-control">
@@ -31,7 +31,7 @@
                                 <option>Shoes</option>
                             </select>
                         </form>
-                    </div>
+                    </div> --}}
                     <div class="widget product-category">
                         <h4 class="widget-title">Categories</h4>
                         @foreach ($category as $item)
@@ -40,8 +40,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                                href='{{route('category.show',$item->id)}}' aria-expanded="true" aria-controls="collapseOne">
+                                            <a href='{{route('category.show',$item->id)}}' >
                                                 {{ $item->name }}
                                             </a>
                                         </h4>

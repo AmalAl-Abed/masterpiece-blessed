@@ -1030,8 +1030,9 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .hero-slider .btn:hover {
-  color: black;
-  background-color: #fff;
+  color: #fff;
+  background-color: black ;
+  border: #000;
 }
 
 .hero-slider h1 {

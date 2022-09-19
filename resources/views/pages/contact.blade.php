@@ -19,14 +19,18 @@
 
 
 
-
     <section class="page-wrapper">
         <div class="contact-section">
             <div class="container">
                 <div class="row">
+
                     <!-- Contact Form -->
                     <div class="contact-form col-md-6 ">
-                        <form id="contact-form" action="{{ route('contact.store') }}" method="POST"
+                        @if(Session::has('message'))
+                        <p class="alert  alert-light" style="background: #ffc0cb8f">{{ Session::get('message') }}</p>
+                        @endif
+
+                        <form id="contact-form" action="{{ route('message.store') }}" method="POST"
                             enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="form-group">
@@ -72,7 +76,7 @@
                         <ul class="contact-short-info">
                             <li>
                                 <i class="tf-ion-ios-home"></i>
-                                <span>Khaja Road, Bayzid, Chittagong, Bangladesh</span>
+                                <span>Khaja Road, Bayzid, Swiffyeh, Amman</span>
                             </li>
                             <li>
                                 <i class="tf-ion-android-phone-portrait"></i>
@@ -84,7 +88,7 @@
                             </li>
                             <li>
                                 <i class="tf-ion-android-mail"></i>
-                                <span>Email: hello@example.com</span>
+                                <span>Email: BlseedBeauty@gmail.com</span>
                             </li>
                         </ul>
                         <!-- Footer Social Links -->

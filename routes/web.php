@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Product;
@@ -25,6 +26,11 @@ use App\Models\Product;
 Route::get('/about', function () {
     return view('pages.about');
 });
+
+Route::get('/contact', function () {
+    return view('pages.contact');
+});
+
 
 Route::get('/confirm', function () {
     return view('pages.confirmation');
@@ -61,12 +67,13 @@ view::composer(['pages.home', 'layouts.nav'], function ($view) {
 //website Routes
 
 
-Route::resource('contact', ContactController::class);
+Route::resource('message', ContactController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('product', ProductController::class);
 Route::resource('cart', CartController::class);
 Route::resource('orders', OrderController::class);
 Route::resource('comments', CommentController::class);
+Route::resource('users', UserController::class);
 
 
 

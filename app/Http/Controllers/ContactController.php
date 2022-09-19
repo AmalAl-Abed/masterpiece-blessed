@@ -1,6 +1,3 @@
-
-
-
 <?php
 
 namespace App\Http\Controllers;
@@ -15,9 +12,10 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Contact::all();
+        return view('admin.messagesView', compact('data'));
     }
 
     /**
@@ -39,7 +37,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
 
-      $request->validate([
+        $request->validate([
             'name' => 'required',
             'email' => 'required',
             'subject' => 'required',
@@ -48,11 +46,10 @@ class ContactController extends Controller
         ]);
 
         $data = $request->all();
-        Contact::create( $data);
+        Contact::create($data);
 
 
-        return redirect('contact')->with('message','your message has been sent successfully.');
-
+        return redirect(url()->previous())->with('message', 'your message has been sent successfully.');
     }
 
     /**
@@ -61,9 +58,8 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(Request $request)
     {
-        //
     }
 
     /**
@@ -95,8 +91,10 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        $category = Contact::find($id);
+        $category->delete();
+        return redirect()->route('user.index');
     }
 }

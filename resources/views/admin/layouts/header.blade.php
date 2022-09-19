@@ -94,8 +94,30 @@
                     </li> --}}
 
                     <!-- Kitchens -->
+
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">First Section</span>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Layouts">Users</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('users.index') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Show Users</div>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Second Section</span>
                     </li>
 
                     <li class="menu-item">
@@ -118,13 +140,15 @@
 
                         </ul>
                     </li>
+
+
                     <!-- Category -->
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Second Section</span>
+                        <span class="menu-header-text">Third Section</span>
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <i class="menu-icon tf-icons bx bx-box"></i>
                             <div data-i18n="Layouts">Products</div>
                         </a>
 
@@ -143,12 +167,12 @@
                         </ul>
                     </li>
                     <!-- Components -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Third Section</span>
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Fourth Section</span>
                     </li>
                     <!-- Cards -->
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <i class="menu-icon tf-icons bx bx-package"></i>
                             <div data-i18n="Layouts">Orders</div>
                         </a>
 
@@ -162,7 +186,24 @@
                         </ul>
                     </li>
                     <!-- User interface -->
+       <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Fifth Section</span>
+                    </li>
 
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-message"></i>
+                            <div data-i18n="Layouts">Messages</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href={{route('message.index')}} class="menu-link">
+                                    <div data-i18n="Without menu">Show Messages</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
 
                 </ul>

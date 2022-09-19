@@ -20,15 +20,16 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="basic-default-fullname" required>category Name</label>
-                                    <input type="text" name="name" class="form-control" id="basic-default-fullname" />
+                                    <input type="text" name="name" class="form-control" id="basic-default-fullname" value="{{$category->name}}"/>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="basic-default-message">Description</label>
-                                    <textarea name="description" id="basic-default-message" required class="form-control" placeholder="Add text here..."></textarea>
+
+                                    <textarea name="description" id="basic-default-message"  required class="form-control" placeholder="Add text here...">{{$category->description}}</textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">category Image</label>
-                                    <input class="form-control" name="image" type="file" id="formFile"  required />
+                                    <input class="form-control" name="image" type="file" id="formFile"value="{{$category->image}}"  required />
                                 </div>
                                 <button type="submit" class="btn btn-primary">Send</button>
                             </form>
