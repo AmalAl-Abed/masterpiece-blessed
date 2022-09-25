@@ -18,7 +18,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Image</th>
-                                <th>categories</th>
+                                <th>Categories</th>
+                                <th>Description</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -34,7 +35,9 @@
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
                                         <strong>{{ $item->name }}</strong>
                                     </td>
-
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                        <strong>{{ $item->description }}</strong>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

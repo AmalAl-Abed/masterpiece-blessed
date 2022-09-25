@@ -21,6 +21,12 @@
                                     <label class="form-label" for="basic-default-fullname" required>Product Name</label>
                                     <input type="text" name="name" class="form-control" id="basic-default-fullname" />
                                 </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="basic-default-message">Short Description</label>
+                                    <textarea name="short_description" id="basic-default-message" required class="form-control"
+                                        placeholder="Add text here..."></textarea>
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="basic-default-message">Description</label>
                                     <textarea name="description" id="basic-default-message" required class="form-control" placeholder="Add text here..."></textarea>
@@ -29,10 +35,16 @@
                                     <label for="formFile" class="form-label">Product image</label>
                                     <input class="form-control" name="image" type="file" id="formFile" required />
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Price</label>
                                     <input class="form-control" name="price" type="number" id="formFile" step="0.1"
                                         required />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Sale Price</label>
+                                    <input class="form-control" name="sale_price" type="number" id="formFile" step="0.1"
+                                         />
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Quantity</label>

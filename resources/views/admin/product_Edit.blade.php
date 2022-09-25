@@ -22,17 +22,28 @@
                                     <input type="text" name="name" class="form-control" id="basic-default-fullname" value="{{$Productjoin[0]->name}}"/>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label" for="basic-default-message">Short Description</label>
+                                    <textarea name="short_description" id="basic-default-message" required class="form-control"
+                                        placeholder="Add text here...">{{$Productjoin[0]->short_description}}</textarea>
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label" for="basic-default-message">Description</label>
                                     <textarea name="description" id="basic-default-message"  required class="form-control" placeholder="Add text here...">{{$Productjoin[0]->description}}</textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Product image</label>
-                                    <input class="form-control" name="image" type="file" id="formFile" required />
+                                    <input class="form-control" name="image" type="file" id="formFile" />
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Price</label>
                                     <input class="form-control" name="price" type="number" id="formFile" step="0.1" value="{{$Productjoin[0]->regular_price}}"
                                         required />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Sale Price</label>
+                                    <input class="form-control" name="sale_price" type="number" id="formFile" step="0.1" alue="{{$Productjoin[0]->sale_price}}"
+                                         />
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Quantity</label>
@@ -40,7 +51,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Kitchen</label>
+                                    <label for="formFile" class="form-label">Category</label>
                                     <select name="category_id" class="form-control" required selected value="{{$Productjoin[0]->category_name}}">
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>

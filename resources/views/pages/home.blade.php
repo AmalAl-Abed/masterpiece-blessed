@@ -10,7 +10,7 @@
                             <br>and coverage for you.
                         </h1>
                         <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
-                            href="/category/1">Shop Now</a>
+                            href="/category/2">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             <br> In Your Look.
                         </h1>
                         <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
-                            style="color: aliceblue; border-color:aliceblue;" href="shop.html">Shop Now </a>
+                            style="color: aliceblue; border-color:aliceblue;" href="/category/1">Shop Now </a>
                     </div>
                 </div>
             </div>
@@ -36,11 +36,11 @@
                 <div class="row">
                     <div class="col-lg-8 text-left">
                         <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-                        <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">A FULL FACE OF BLESSED
+                        <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">A FULL FACE FROM BLESSED
                             <br>
                         </h1>
                         <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
-                            href="shop.html">Shop Now</a>
+                            href="/category/3">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -74,16 +74,13 @@
         </div>
     </section>
 
-    <div class="row">
-        <div class="col-xs-6" style="padding: 0px !important">
+    <div class="row" style="margin-right:0">
+        <div class="col-xs-6" style="padding: 0px !important;margin-right:0;">
             <div class="img">
                 <img src="../images/grid.png" width="100%">
             </div>
         </div>
         <div class="col-xs-6">
-
-            <div class="vc_column-inner" style="background-image:url('images/b1.jpg')">
-
 
                 <div class="mkdf-eh-item-inner">
                     <div class="mkdf-eh-item-content mkdf-eh-custom-3083" style="padding: 85px 34% 0px 117px;">
@@ -141,11 +138,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="max-width: 100%">
 
-        <div class="col-xs-6" style="padding: 0px !important">
+        <div class="col-xs-6" style="padding: 0px !important;margin-right:0;">
 
-            <div class="vc_column-inner">
+            <div class="vc_column-inner" style="margin-right: 0%">
 
 
                 <div class="mkdf-eh-item" data-item-class="mkdf-eh-custom-3083" data-1400-1600="120px 22% 120px 80px"
@@ -173,12 +170,12 @@
                                 </div>
                             </div>
                             <div class="vc_empty_space" style="height: 34px"><span class="vc_empty_space_inner"></span>
-                            </div><a itemprop="url" href="category/4" target="_self"
+                            </div><a itemprop="url" href="/about" target="_self"
                                 class="mkdf-btn mkdf-btn-medium mkdf-btn-outline">
                                 <span class="mkdf-btn-text"
                                     style="border: solid 1px gray;
-                            padding: 10px;">Find
-                                    beauty</span>
+                            padding: 10px;">Read
+                                    More</span>
                             </a>
                         </div>
                     </div>
@@ -207,9 +204,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6" style="padding: 0px !important">
+        <div class="col-xs-6" style="padding: 0px !important" >
             <div class="img">
-                <img src="../images/grid22.png" width="100%"height="500px">
+                <img src="../images/grid22.png" width="100%"height="450px">
             </div>
         </div>
     </div>
@@ -223,8 +220,10 @@
             <div class="row">
                 @foreach ($popular_products as $item)
                     <div class="col-md-4">
+                        <a href="{{ route('product.show', $item->id) }}">
                         <div class="product-item">
                             <div class="product-thumb">
+
                                 <span class="bage">Sale</span>
                                 <img class="img-responsive" src="public/Productimages/{{ $item->image }}"
                                     alt="product-img" />
@@ -255,8 +254,14 @@
                                 </div>
                             </div>
                             <div class="product-content">
-                                <h4><a href=""></a>{{ $item->name }}</h4>
-                                <p class="price">{{ $item->regular_price }}</p>
+                                <h4>{{ $item->name }}</h4>
+                                @if ($item->sale_price !== null)
+                                <p class="price" style="text-decoration: line-through">{{ $item->regular_price }}JD</p>
+                                <h4 class="price" style="line-height:0px">{{ $item->sale_price }}JD</h4>
+                            @else
+                                <p class="price">{{ $item->regular_price }}JD</p>
+                            @endif
+                        </a>
                             </div>
                         </div>
                     </div>

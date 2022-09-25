@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="shop.html">Shop</a></li>
                         <li class="active">Single Product</li>
                     </ol>
@@ -20,11 +20,11 @@
                 </div>
 
             </div>
-<div>
-     @if(Session::has('message'))
-    <p class="alert  alert-light" style="background: #ffc0cb8f">{{ Session::get('message') }}</p>
-    @endif
-</div>
+            <div>
+                @if (Session::has('message'))
+                    <p class="alert  alert-light" style="background: #ffc0cb8f">{{ Session::get('message') }}</p>
+                @endif
+            </div>
 
             <div class="row mt-20">
                 <div class="col-md-5">
@@ -34,84 +34,56 @@
                                 <!-- me art lab slider -->
                                 <div class='carousel-inner '>
                                     <div class='item active'>
-                                        <img src='/public/Productimages/{{ $single->image}}' alt=''
+                                        @if ($single->sale_price !== null)
+                                            <span class="bage"
+                                                style="position: absolute;
+                                        top: 12px;
+                                        right: 12px;
+                                        background: #000;
+                                        color: #fff;
+                                        font-size: 18px;
+                                        padding: 4px 12px;
+                                        font-weight: 300;
+                                        display: inline-blo">Sale</span>
+                                        @endif
+                                        <img src='/public/Productimages/{{ $single->image }}' alt=''
                                             data-zoom-image="images/shop/single-products/product-1.jpg" />
-                                    </div>
-                                    <div class='item'>
-                                        <img src='images/shop/single-products/product-2.jpg' alt=''
-                                            data-zoom-image="images/shop/single-products/product-2.jpg" />
-                                    </div>
 
-                                    <div class='item'>
-                                        <img src='images/shop/single-products/product-3.jpg' alt=''
-                                            data-zoom-image="images/shop/single-products/product-3.jpg" />
                                     </div>
-                                    <div class='item'>
-                                        <img src='images/shop/single-products/product-4.jpg' alt=''
-                                            data-zoom-image="images/shop/single-products/product-4.jpg" />
-                                    </div>
-                                    <div class='item'>
-                                        <img src='images/shop/single-products/product-5.jpg' alt=''
-                                            data-zoom-image="images/shop/single-products/product-5.jpg" />
-                                    </div>
-                                    <div class='item'>
-                                        <img src='images/shop/single-products/product-6.jpg' alt=''
-                                            data-zoom-image="images/shop/single-products/product-6.jpg" />
-                                    </div>
-
                                 </div>
 
-                                <!-- sag sol -->
-                                <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
-                                    <i class="tf-ion-ios-arrow-left"></i>
-                                </a>
-                                <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
-                                    <i class="tf-ion-ios-arrow-right"></i>
-                                </a>
+
                             </div>
 
-                            <!-- thumb -->
-                            <ol class='carousel-indicators mCustomScrollbar meartlab'>
 
-                                {{-- <img src='/public/Productimages/{{ $single->image}}' alt='' height=500 /> --}}
 
-                                <li data-target='#carousel-custom' data-slide-to='1'>
-                                    <img src='images/shop/single-products/product-2.jpg' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='2'>
-                                    <img src='images/shop/single-products/product-3.jpg' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='3'>
-                                    <img src='images/shop/single-products/product-4.jpg' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='4'>
-                                    <img src='images/shop/single-products/product-5.jpg' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='5'>
-                                    <img src='images/shop/single-products/product-6.jpg' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='6'>
-                                    <img src='images/shop/single-products/product-7.jpg' alt='' />
-                                </li>
-                            </ol>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="single-product-details">
                         <h2>{{ $single->name }}</h2>
-                        <p class="product-price">{{ $single->regular_price }}JD</p>
+                        @if ($single->sale_price !== null)
+                            <p class="product-price">Previous price: <span
+                                    style="text-decoration: line-through">{{ $single->regular_price }}JD</span></p>
+                            <h4 class="product-price">Sale price: <span>{{ $single->sale_price }}JD</span></h4>
+                        @else
+                            <h4 class="product-price"><span>{{ $single->regular_price }}JD</span></h4>
+                        @endif
+
+
 
                         <p class="product-description mt-20">
                             {{ $single->short_description }}
                         </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, velit, sunt temporibus, nulla
-                            accusamus similique sapiente tempora, at atque cumque assumenda minus asperiores est esse sequi
-                            dolore magnam. Debitis, explicabo.</p>
+                        <p>Conceal, contour, and set with next-level precision:
+
+                            Use damp for buildable coverage or dry for full coverage.
+                            .</p>
                         <div class="color-swatches">
                             <span>shades:</span>
                             <ul>
-                              
+
                                 <li>
                                     <a href="#!" class="swatch-black"></a>
                                 </li>
@@ -121,31 +93,39 @@
                             </ul>
                         </div>
 
-                        <form action="{{ route('cart.store')}}" method="post">
+                        <form action="{{ route('cart.store') }}" method="post">
                             @csrf
-                        <div class="product-quantity">
-                            <span>Quantity:</span>
-                            <div class="product-quantity-slider">
-                                <input id="product-quantity" type="number" value="" name="quantity">
+                            <div class="product-quantity">
+                                <span>Quantity:</span>
+                                <div class="product-quantity-slider">
+                                    <input id="product-quantity" type="number" value="" name="quantity" requiredcar
+                                        placeholder="1">
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-category">
-                            <span>category:</span>
-                            <ul>
-                                <li><a href="product-single.html">{{ $Productjoin[0]->categoryName }}</a></li>
+                            <div class="product-category">
+                                <span>category:</span>
+                                <ul>
+                                    <li><a href="product-single.html">{{ $Productjoin[0]->categoryName }}</a></li>
 
-                            </ul>
-                        </div>
-
+                                </ul>
+                            </div>
 
 
 
-                            <input type="hidden" name="id" value="{{ $single->id }}"/>
-                            <input type="hidden" name="product_price" value="{{$single->product_price }}"/>
 
-                            <button type="submit" class="btn btn-main mt-20" >
+                            <input type="hidden" name="id" value="{{ $single->id }}" />
 
-                       Add To Cart
+                            @if ($single->sale_price !== null)
+                                <input type="hidden" name="product_price" value="{{ $single->sale_price }}" />
+                            @else
+                                <input type="hidden" name="product_price" value="{{ $single->product_price }}" />
+                            @endif
+
+                            <input type="hidden" name="product_price" value="{{ $single->product_price }}" />
+
+                            <button type="submit" class="btn btn-main mt-20">
+
+                                Add To Cart
                             </button>
                         </form>
 
@@ -159,8 +139,10 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#details" aria-expanded="true">Details</a>
                             </li>
+                            @php $count = 0; @endphp
                             <li class=""><a data-toggle="tab" href="#reviews" aria-expanded="false">Reviews
-                                    (3)</a></li>
+
+                                </a></li>
                         </ul>
 
 
@@ -179,37 +161,38 @@
                                 <div class="post-comments">
                                     <ul class="media-list comments-list m-bot-50 clearlist">
                                         <!-- Comment Item start-->
-                                        @foreach($showComments as $comment)
-                                        <li class="media">
 
-                                            <a class="pull-left" href="#!">
-                                                <img class="media-object comment-avatar" src="../images/blog/avater-1.jpg"
-                                                    alt="" width="50" height="50" />
-                                            </a>
+                                        @foreach ($showComments as $comment)
+                                            @php $count++ @endphp
 
-                                            <div class="media-body">
-                                                <div class="comment-info">
-                                                    <h4 class="comment-author">
-                                                        <a href="#!">{{$comment->name}}</a>
+                                            <li class="media">
 
-                                                    </h4>
-                                                    <time datetime="2013-04-06T13:53">{{$comment->created_at}}</time>
-                                                    <a class="comment-button" href="#!"><i
-                                                            class="tf-ion-chatbubbles"></i>Reply</a>
+                                                <a class="pull-left" href="#!">
+                                                    <img class="media-object comment-avatar"
+                                                        src="../images/blog/avater-1.jpg" alt="" width="50"
+                                                        height="50" />
+                                                </a>
+
+                                                <div class="media-body">
+                                                    <div class="comment-info">
+                                                        <h4 class="comment-author">
+                                                            <a href="#!">{{ $comment->name }}</a>
+
+                                                        </h4>
+                                                        <time datetime="2013-04-06T13:53">{{ $comment->created_at }}</time>
+
+                                                    </div>
+
+                                                    <p>
+                                                        {{ $comment->comment }}
+                                                    </p>
                                                 </div>
 
-                                                <p>
-                                                  {{$comment->comment}}
-                                                </p>
-                                            </div>
+                                            </li>
+                                            <!-- End Comment Item -->
+                                        @endforeach
 
-                                        </li>
-                                        <!-- End Comment Item -->
-
-                                      @endforeach
-
-
-
+                                        <div id="count" style="display: none">{{ $count }}</div>
                                     </ul>
                                 </div>
                             </div>
@@ -232,13 +215,15 @@
                                 <div class="form-outline w-100">
                                     <h4 for="textAreaExample">Tell Us What you Think About This Product:</h4>
 
-                                    <form action="{{ route('comments.store')}}" method="post">
+                                    <form action="{{ route('comments.store') }}" method="post">
                                         @csrf
 
-                                    <input type="hidden" name="id" value="{{ $single->id }}"/>
-                                    <textarea class="form-control" id="textAreaExample"  name="comment" rows="4" style="background: #fff;" placeholder="write your comment here"></textarea>
+                                        <input type="hidden" name="id" value="{{ $single->id }}" />
+                                        <textarea class="form-control" id="textAreaExample" name="comment" rows="4" style="background: #fff;"
+                                            placeholder="write your comment here"></textarea>
 
-                                        <button class="active btn btn-main ms-20" style="margin-top:20px">Post your comment</button>
+                                        <button class="active btn btn-main ms-20" style="margin-top:20px">Post your
+                                            comment</button>
                                     </form>
 
 
@@ -262,10 +247,12 @@
             <div class="row">
                 @foreach ($related_products as $item)
                     <div class="col-md-3">
+                        <a href="{{route('product.show', $item->id)}}">
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <img class="img-responsive" src="/public/Productimages/{{ $item->image}}" alt="product-img" />
+                                <img class="img-responsive" src="/public/Productimages/{{ $item->image }}"
+                                    alt="product-img" />
                                 <div class="preview-meta">
                                     <ul>
                                         {{-- <li>
@@ -276,12 +263,16 @@
                                         <li>
                                             <a href="#"><i class="tf-ion-ios-heart"></i></a>
                                         </li> --}}
-                                        <form action="{{ route('cart.store')}}" method="post">
-                                            <input type="hidden" name="id" value="{{ $item->id }}"/>
+                                        <form action="{{ route('cart.store') }}" method="post">
+                                            <input type="hidden" name="id" value="{{ $item->id }}" />
                                             <input type="hidden" name="quantity" value="1" />
-                                            <input type="hidden" name="product_price" value="{{$item->product_price }}"/>
+                                            <input type="hidden" name="product_price"
+                                                value="{{ $item->product_price }}" />
                                             @csrf
-                                        <button class="btn btn-main"><i class="tf-ion-ios-cart"></i></button>
+
+                                            <button type="submit" style="width: 45px;height:45px;border:none">
+                                                <i class="tf-ion-android-cart"></i>
+                                            </button>
                                         </form>
 
 
@@ -290,9 +281,10 @@
                                 </div>
                             </div>
                             <div class="product-content">
-                                <h4><a href="product-single.html">{{ $item->name }}</a></h4>
+                                <h4>{{ $item->name }}</h4>
                                 <p class="price">{{ $item->regular_price }}JD</p>
                             </div>
+                        </a>
                         </div>
                     </div>
                 @endforeach
@@ -305,5 +297,4 @@
 
 
     <!-- Modal -->
-
 @endsection

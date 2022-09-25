@@ -21,7 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
-
+/>
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="/../admin/assets/vendor/fonts/boxicons.css" />
 
@@ -57,7 +57,8 @@
                         <span class="app-brand-logo demo">
                             <img src="../../images/favicon.png" width="50px" height="50px">
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform:capitalize;color:black">Blessed</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2"
+                            style="text-transform:capitalize;color:black">Blessed</span>
                     </a>
 
                     <a href="javascript:void(0);"
@@ -186,7 +187,7 @@
                         </ul>
                     </li>
                     <!-- User interface -->
-       <li class="menu-header small text-uppercase">
+                    <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Fifth Section</span>
                     </li>
 
@@ -198,7 +199,7 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href={{route('message.index')}} class="menu-link">
+                                <a href={{ route('message.index') }} class="menu-link">
                                     <div data-i18n="Without menu">Show Messages</div>
                                 </a>
                             </li>
@@ -224,23 +225,16 @@
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text" class="form-control border-0 shadow-none"
-                                    placeholder="Search..." aria-label="Search..." />
-                            </div>
-                        </div>
+                        <h5 style="margin-top:12px"><a href="/" style="color: #697a8d"><i
+                                    style="color: #697a8d;
+    margin-right: 7px;
+    font-size: 19px;"
+                                    class="fa-solid fa-house"></i>Return To Home Page</a></h5>
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
-                            <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                            </li>
+
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">

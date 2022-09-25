@@ -585,7 +585,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .tabCommon .tab-content {
-  padding: 20px;
+  padding: 0px 20px;
   border: 1px solid #dedede;
 }
 
@@ -1855,9 +1855,6 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   margin: 30px 0;
 }
 
-.post-comments .media {
-  margin-top: 15px;
-}
 
 .post-comments .media > .pull-left {
   padding-right: 20px;

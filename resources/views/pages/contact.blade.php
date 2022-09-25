@@ -82,10 +82,7 @@
                                 <i class="tf-ion-android-phone-portrait"></i>
                                 <span>Phone: +880-31-000-000</span>
                             </li>
-                            <li>
-                                <i class="tf-ion-android-globe"></i>
-                                <span>Fax: +880-31-000-000</span>
-                            </li>
+
                             <li>
                                 <i class="tf-ion-android-mail"></i>
                                 <span>Email: BlseedBeauty@gmail.com</span>
@@ -94,15 +91,11 @@
                         <!-- Footer Social Links -->
                         <div class="social-icon">
                             <ul>
-                                <li><a class="fb-icon" href="https://www.facebook.com/themefisher"><i
+                                <li><a class="fb-icon" href="https://www.facebook.com/amal.makeupresto"><i
                                             class="tf-ion-social-facebook"></i></a></li>
-                                <li><a href="https://www.twitter.com/themefisher"><i class="tf-ion-social-twitter"></i></a>
+                                <li><a href="https://www.twitter.com/themefisher"><i class="fa-brands fa-tiktok"></i></a>
                                 </li>
-                                <li><a href="https://themefisher.com/"><i class="tf-ion-social-dribbble-outline"></i></a>
-                                </li>
-                                <li><a href="https://themefisher.com/"><i class="tf-ion-social-googleplus-outline"></i></a>
-                                </li>
-                                <li><a href="https://themefisher.com/"><i class="tf-ion-social-pinterest-outline"></i></a>
+                                <li><a href="https://www.instagram.com/amal_makeupstore/?hl=en"><i class="tf-ion-social-instagram-outline"></i></a>
                                 </li>
                             </ul>
                         </div>

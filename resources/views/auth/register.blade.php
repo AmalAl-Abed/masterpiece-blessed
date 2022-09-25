@@ -147,11 +147,16 @@
 
                     </div>
 
+               
+
+
+
                     <div class="form-outline mb-4">
                         <label class="form-label" for="password" value="{{ __('Password') }}" >Password</label>
                       <input  class="form-control form-control-lg" id="password" type="password" name="password" required autocomplete="new-password" />
 
                     </div>
+
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="password" value="{{ __('Confirm Password') }}" > Confirm Password</label>

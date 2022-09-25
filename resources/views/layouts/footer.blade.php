@@ -1,21 +1,21 @@
-<footer class="footer section text-center">
+<footer class="footer section text-center" style="background-color: #ebe8e8">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <ul class="social-media">
                     <li>
-                        <a href="https://www.facebook.com/themefisher">
+                        <a href="https://www.facebook.com/amal.makeuprestore">
                             <i class="tf-ion-social-facebook"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.instagram.com/themefisher">
+                        <a href="https://www.instagram.com/amal_makeupstore/?hl=en">
                             <i class="tf-ion-social-instagram"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.twitter.com/themefisher">
-                            <i class="tf-ion-social-twitter"></i>
+                            <i class="fa-brands fa-tiktok"></i>
                         </a>
                     </li>
                     <li>

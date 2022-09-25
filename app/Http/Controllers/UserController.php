@@ -75,10 +75,11 @@ class UserController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $category = User::find($id);
-        $category->delete();
-        return redirect()->route('user.index');
+        $user->delete();
+
+        return redirect()->route('users.index')
+        ->with('message', 'user has been deleted successfully');
     }
 }

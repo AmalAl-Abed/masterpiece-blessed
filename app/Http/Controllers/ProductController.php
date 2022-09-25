@@ -49,6 +49,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->quantity = $request->quantity;
         $product->description = $request->description;
+        $product->short_description	 = $request->short_description;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time() . '.' . $image->getClientOriginalExtension();
@@ -56,10 +57,13 @@ class ProductController extends Controller
             $image->move($destinationPath, $name);
             $product->image = $name;
             $product->regular_price = $request->price;
+            $product->sale_price = $request->sale_price;
             $product->category_id = $request->category_id;
             $product->save();
             return redirect('/product')->with('success', 'Product has been added');
         }
+
+
     }
 
     /**
@@ -125,6 +129,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->quantity = $request->quantity;
         $product->description = $request->description;
+        $product->short_description	 = $request->short_description;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time() . '.' . $image->getClientOriginalExtension();
@@ -133,6 +138,7 @@ class ProductController extends Controller
             $product->image = $name;
         }
         $product->regular_price = $request->price;
+        $product->sale_price = $request->sale_price;
         $product->category_id = $request->category_id;
         $product->save();
         return redirect('/product')->with('success', 'Product has been added');

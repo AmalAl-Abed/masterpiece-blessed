@@ -41,7 +41,7 @@
                         and simple payment method.and some of
                     </p>
                     <br><br>
-                    <a href="/contact" class="btn btn-main mt-20">CHECK OUR INSTAGRAM</a>
+                    <a href="https://www.instagram.com/amal_makeupstore/?hl=en" class="btn btn-main mt-20">CHECK OUR INSTAGRAM</a>
                 </div>
             </div>
 

@@ -79,6 +79,7 @@ class OrderController extends Controller
             $order->user_id = $user[0]->user_id;
             $order->product_id = $user[0]->product_id;
             $order->product_quantity = $user[0]->quantity;
+        
             $subtotal = Cart::where('user_id', auth()->user()->id)->pluck('sub_total')->sum();
             $order->order_total_price = $subtotal;
             $order->order_status = 0;

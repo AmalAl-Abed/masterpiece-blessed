@@ -192,7 +192,7 @@
                                             ->where('user_id', auth()->user()->id)
                                             ->join('users', 'carts.user_id', '=', 'users.id')
                                             ->join('products', 'carts.product_id', '=', 'products.id')
-                                            ->get(['carts.id', 'carts.sub_total', 'carts.quantity', 'products.image', 'products.name', 'products.regular_price']);
+                                            ->get(['carts.id', 'carts.sub_total', 'carts.quantity', 'products.image', 'products.name', 'products.regular_price', 'products.sale_price', 'products.id']);
                                         $total = Cart::where('user_id', auth()->user()->id)
                                             ->pluck('sub_total')
                                             ->sum();
@@ -204,7 +204,8 @@
 
 
                                         <a class="pull-left" href="#!">
-                                            <img class="media-object" src="{{ $cartItems[0]->image }}"
+                                            <img class="media-object"
+                                                src="/public/Productimages/{{ $cartItems[0]->image }}"
                                                 alt="image" />
                                         </a>
                                         <div class="media-body">
@@ -216,7 +217,13 @@
                                             </div>
                                             <h5><strong> </strong></h5>
                                         </div>
-                                        <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
+                                        <form action="{{ route('cart.destroy', $cartItems[0]->id) }}" method="POST"
+                                            class="d-inline">
+                                            @method('DELETE')
+                                            @csrf
+                                            <td><button class="remove" style="border:none; background:#fff"><i
+                                                        class="tf-ion-close" style="margin-left:40px"></i></button></td>
+                                        </form>
 
                                     </div>
 
@@ -233,7 +240,7 @@
                                 </div>
                                 <ul class="text-center cart-buttons">
                                     <li><a href="/cart" class="btn btn-small">View Cart</a></li>
-                                    <li><a href="checkout.html" class="btn btn-small btn-solid-border">Checkout</a>
+                                    <li><a href="/checkout" class="btn btn-small btn-solid-border">Checkout</a>
                                     </li>
                                 </ul>
                             </div>
@@ -242,8 +249,8 @@
 
                         <!-- Search -->
                         <li class="dropdown search dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-                                    class="tf-ion-ios-search-strong"></i> Search</a>
+                            {{-- <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+                                    class="tf-ion-ios-search-strong"></i> Search</a> --}}
                             <ul class="dropdown-menu search-dropdown">
                                 <li>
                                     <form action="post"><input type="search" class="form-control"
